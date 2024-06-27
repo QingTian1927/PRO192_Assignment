@@ -1,6 +1,8 @@
 package com.example.models;
 
 public class Brand {
+    public static final String BRAND_PROPERTY_SEPARATOR = ", ";
+
     private String brandID;
     private String brandName;
     private String soundBrand;
