@@ -2,6 +2,9 @@ package com.example.models;
 
 import com.example.ui.Menu;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -212,5 +215,53 @@ public class CarList {
         updatedCar.setEngineId(engineId);
 
         return true;
+    }
+
+    public boolean saveToFile(String fileName) throws IOException {
+        Path saveFile = new File(fileName).toPath();
+        try (
+                BufferedWriter bw = Files.newBufferedWriter(saveFile)
+        ) {
+            for (Car car : this.carList) {
+                bw.write(car.toString());
+                bw.newLine();
+            }
+        }
+        return true;
+    }
+
+    public boolean readFromFile(String fileName) throws IOException {
+        File saveFile = new File(fileName);
+        if (!saveFile.exists()) {
+            throw new FileNotFoundException("Save file does not exist");
+        }
+
+        boolean hasCorruptedEntries = false;
+        try (
+                FileReader fr = new FileReader(saveFile);
+                BufferedReader br = new BufferedReader(fr)
+        ) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(Car.CAR_PROPERTY_SEPARATOR);
+
+                String carId = fields[0];
+                String brandId = fields[1];
+                String color = fields[2];
+                String frameId = fields[3];
+                String engineId = fields[4];
+
+                int index = this.brandList.searchId(brandId);
+                if (index == -1) {
+                    hasCorruptedEntries = true;
+                    continue;
+                }
+                Brand brand = this.brandList.getBrandList().get(index);
+
+                this.carList.add(new Car(carId, brand, color, frameId, engineId));
+            }
+        }
+
+        return hasCorruptedEntries;
     }
 }

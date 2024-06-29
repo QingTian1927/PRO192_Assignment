@@ -1,6 +1,7 @@
 package com.example.models;
 
 public class Car implements Comparable<Car> {
+    public static final String CAR_PROPERTY_SEPARATOR = ", ";
     public static final char FRAMEID_PREFIX = 'F';
     public static final int FRAMEID_LENGTH = 5;
     public static final char ENGINEID_PREFIX = 'E';

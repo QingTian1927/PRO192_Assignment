@@ -150,7 +150,6 @@ public class BrandList {
             throw new FileNotFoundException("Save file does not exist");
         }
 
-        boolean hasNoCorruptedEntries = true;
         try (
                 FileReader fr = new FileReader(saveFile);
                 BufferedReader br = new BufferedReader(fr)
@@ -169,6 +168,7 @@ public class BrandList {
                 this.brandList.add(new Brand(id, name, sound, price));
             }
         }
-        return hasNoCorruptedEntries;
+
+        return true;
     }
 }
