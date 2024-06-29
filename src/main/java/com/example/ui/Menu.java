@@ -5,7 +5,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public final class Menu {
-    private Menu() {}
+    private Menu() {
+    }
 
     public static <E> void listOptions(ArrayList<E> options) {
         if (options.isEmpty()) {
@@ -37,6 +38,11 @@ public final class Menu {
             try {
                 choice = sc.nextInt();
                 sc.nextLine();
+
+                if (choice < 0 || choice > options.size()) {
+                    System.out.println("Invalid choice! Try again!");
+                    sc.nextLine();
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid choice! Try again!");
                 sc.nextLine();
@@ -56,11 +62,5 @@ public final class Menu {
         } while (choice < 0 || choice > options.size());
 
         return options.get(choice - 1);
-    }
-
-    public static void printTitleCard() {
-        System.out.println("----------------------------");
-        System.out.println("PRO192 Minh Trang CarManager");
-        System.out.println("----------------------------\n");
     }
 }
