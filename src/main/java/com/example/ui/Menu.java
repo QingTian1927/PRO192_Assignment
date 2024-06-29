@@ -57,4 +57,10 @@ public final class Menu {
 
         return options.get(choice - 1);
     }
+
+    public static void printTitleCard() {
+        System.out.println("----------------------------");
+        System.out.println("PRO192 Minh Trang CarManager");
+        System.out.println("----------------------------\n");
+    }
 }
