@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class BrandList {
-    private ArrayList<Brand> brandList;
+    private final ArrayList<Brand> brandList;
 
     public BrandList(ArrayList<Brand> brandList) {
         this.brandList = brandList;
@@ -14,6 +14,10 @@ public class BrandList {
 
     public BrandList() {
         this(new ArrayList<Brand>());
+    }
+
+    public ArrayList<Brand> getBrandList() {
+        return brandList;
     }
 
     public int searchId(String brandId) {
