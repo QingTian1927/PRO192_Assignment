@@ -161,8 +161,10 @@ public class BrandList {
 
                 String id = fields[0];
                 String name = fields[1];
-                String sound = fields[2];
-                double price = Double.parseDouble(br.readLine());
+                String[] soundPrice = fields[2].split(Brand.SOUND_PRICE_SEPARATOR);
+
+                String sound = soundPrice[0];
+                double price = Double.parseDouble(soundPrice[1].replace(",", "."));
 
                 this.brandList.add(new Brand(id, name, sound, price));
             }

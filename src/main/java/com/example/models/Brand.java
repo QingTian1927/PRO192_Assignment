@@ -2,6 +2,7 @@ package com.example.models;
 
 public class Brand {
     public static final String BRAND_PROPERTY_SEPARATOR = ", ";
+    public static final String SOUND_PRICE_SEPARATOR = ": ";
 
     private String brandID;
     private String brandName;
