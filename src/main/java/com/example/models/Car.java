@@ -1,11 +1,62 @@
 package com.example.models;
 
 public class Car implements Comparable<Car> {
+    public static final char FRAMEID_PREFIX = 'F';
+    public static final int FRAMEID_LENGTH = 5;
+    public static final char ENGINEID_PREFIX = 'E';
+    public static final int ENGINEID_LENGTH = 5;
+
     private String carId;
     private Brand brand;
     private String color;
     private String frameId;
     private String engineId;
+
+    private static boolean isNotNumber(char ch) {
+        return (ch < '0' || ch > '9');
+    }
+
+    public static boolean isValidFrameId(String frameId) {
+        if (frameId.isEmpty()) {
+            return false;
+        }
+
+        if (frameId.charAt(0) != FRAMEID_PREFIX) {
+            return false;
+        }
+
+        if (frameId.length() != FRAMEID_LENGTH) {
+            return false;
+        }
+
+        for (int i = 1; i < FRAMEID_LENGTH; i++) {
+            if (isNotNumber(frameId.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isValidEngineId(String engineId) {
+        if (engineId.isEmpty()) {
+            return false;
+        }
+
+        if (engineId.charAt(0) != ENGINEID_PREFIX) {
+            return false;
+        }
+
+        if (engineId.length() != ENGINEID_LENGTH) {
+            return false;
+        }
+
+        for (int i = 1; i < ENGINEID_LENGTH; i++) {
+            if (isNotNumber(engineId.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public Car() {}
 
@@ -15,6 +66,14 @@ public class Car implements Comparable<Car> {
         this.color = color;
         this.frameId = frameId;
         this.engineId = engineId;
+    }
+
+    public Car (Car car) {
+        this(car.carId, car.brand, car.color, car.frameId, car.engineId);
+    }
+
+    public Car getCopy() {
+        return new Car(this);
     }
 
     public String getCarId() {
