@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class BrandList {
     private final ArrayList<Brand> brandList;
@@ -29,40 +31,90 @@ public class BrandList {
         return -1;
     }
 
-    public void addBrand(Brand brand) {
-        if (brand.getBrandName().isEmpty() || brand.getBrandName() == null) {
-            throw new IllegalArgumentException("Brand name must not be blank");
-        }
-        if (brand.getSoundBrand().isEmpty() || brand.getSoundBrand() == null) {
-            throw new IllegalArgumentException("Sound brand must not be blank");
-        }
-        if (brand.getPrice() <= 0) {
-            throw new IllegalArgumentException("Price must be a positive real number");
-        }
-        if (this.searchId(brand.getBrandID()) != -1) {
-            throw new IllegalArgumentException("Brand ID can not exist in the list");
-        }
-
-        this.brandList.add(brand);
+    private String inputBrandName() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter brand name: ");
+        System.out.println();
+        return sc.nextLine();
     }
 
-    public void updateBrand(Brand brand) {
-        int index = this.searchId(brand.getBrandID());
+    private String inputSoundBrand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter sound brand: ");
+        System.out.println();
+        return sc.nextLine();
+    }
 
+    private double inputPrice() {
+        Scanner sc = new Scanner(System.in);
+        double price = 0;
+
+        boolean isGettingInput = true;
+        while (isGettingInput) {
+            try {
+                System.out.print("Enter price: ");
+                price = sc.nextDouble();
+
+                if (price <= 0) {
+                    System.out.println("Price must be a positive real number!");
+                    sc.nextLine();
+                    continue;
+                }
+
+                sc.nextLine();
+                isGettingInput = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Try again!");
+                sc.nextLine();
+            }
+        }
+        System.out.println();
+
+        return price;
+    }
+
+    public void addBrand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a new brand ID: ");
+        int searchResult = -1;
+        String brandId = null;
+
+        do {
+            brandId = sc.nextLine();
+            searchResult = this.searchId(brandId);
+
+            if (searchResult != -1) {
+                System.out.println("Brand ID must not be duplicated!");
+            }
+        } while (searchResult != -1);
+        System.out.println();
+
+        String brandName = inputBrandName();
+        String soundBrand = inputSoundBrand();
+        double price = inputPrice();
+
+        this.brandList.add(new Brand(brandId, brandName, soundBrand, price));
+    }
+
+    public void updateBrand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the brand ID: ");
+        String brandId = sc.nextLine();
+
+        int index = this.searchId(brandId);
         if (index == -1) {
-            throw new IllegalArgumentException("Brand ID does not exist");
-        }
-        if (brand.getBrandName().isEmpty() || brand.getBrandName() == null) {
-            throw new IllegalArgumentException("Brand name must not be blank");
-        }
-        if (brand.getSoundBrand().isEmpty() || brand.getSoundBrand() == null) {
-            throw new IllegalArgumentException("Sound brand must not be blank");
-        }
-        if (brand.getPrice() <= 0) {
-            throw new IllegalArgumentException("Price must be a positive real number");
+            System.out.println("Not found!");
+            return;
         }
 
-        this.brandList.set(index, brand);
+        String brandName = inputBrandName();
+        String soundBrand = inputSoundBrand();
+        double price = inputPrice();
+
+        Brand updatedBrand = this.brandList.get(index);
+        updatedBrand.setBrandName(brandName);
+        updatedBrand.setSoundBrand(soundBrand);
+        updatedBrand.setPrice(price);
     }
 
     @Override
@@ -112,11 +164,7 @@ public class BrandList {
                 String sound = fields[2];
                 double price = Double.parseDouble(br.readLine());
 
-                try {
-                    this.addBrand(new Brand(id, name, sound, price));
-                } catch (IllegalArgumentException e) {
-                    hasNoCorruptedEntries = false;
-                }
+                this.brandList.add(new Brand(id, name, sound, price));
             }
         }
         return hasNoCorruptedEntries;

@@ -107,7 +107,7 @@ public class CarList {
     private String inputFrameId() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a new frame ID: ");
-        int searchResult = 0;
+        int searchResult = -1;
         String frameId = null;
 
         do {
@@ -130,7 +130,7 @@ public class CarList {
     private String inputEngineId() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a new engine ID: ");
-        int searchResult = 0;
+        int searchResult = -1;
         String engineId = null;
 
         do {
@@ -153,7 +153,7 @@ public class CarList {
     public void addCar() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a new car ID: ");
-        int searchResult = 0;
+        int searchResult = -1;
         String carId = null;
 
         do {
