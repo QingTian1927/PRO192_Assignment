@@ -25,7 +25,7 @@ public class Brand {
     @Override
     public String toString() {
         return String.format(
-                "%s, %s, %s, %f",
+                "%s, %s, %s: %f",
                 this.brandID,
                 this.brandName,
                 this.soundBrand,

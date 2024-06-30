@@ -22,7 +22,7 @@ public class CarList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (Car car : carList) {
-            result.append(car.toString()).append('\n');
+            result.append(car.toString()).append("\n\n");
         }
         return result.toString();
     }
@@ -155,11 +155,11 @@ public class CarList {
 
     public void addCar() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a new car ID: ");
         int searchResult = -1;
         String carId = null;
 
         do {
+            System.out.print("Enter a new car ID: ");
             carId = sc.nextLine();
             searchResult = this.searchId(carId);
 
