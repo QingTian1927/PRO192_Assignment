@@ -12,10 +12,15 @@ import java.util.Scanner;
 public class CarList {
     private final BrandList brandList;
     private final ArrayList<Car> carList;
+    private boolean isModified = false;
 
     public CarList(BrandList brandList) {
         this.carList = new ArrayList<Car>();
         this.brandList = brandList;
+    }
+
+    public boolean isModified() {
+        return this.isModified;
     }
 
     @Override
@@ -23,14 +28,6 @@ public class CarList {
         StringBuilder result = new StringBuilder();
         for (Car car : carList) {
             result.append(car.toString()).append("\n\n");
-        }
-        return result.toString();
-    }
-
-    public String screenString() {
-        StringBuilder result = new StringBuilder();
-        for (Car car : carList) {
-            result.append(car.screenString()).append('\n');
         }
         return result.toString();
     }
@@ -45,6 +42,7 @@ public class CarList {
         for (Car car : clonedCars) {
             System.out.println(car.screenString());
         }
+        System.out.println();
     }
 
     public int searchId(String carId) {
@@ -175,6 +173,7 @@ public class CarList {
         String engineId = inputEngineId();
 
         this.carList.add(new Car(carId, brand, color, frameId, engineId));
+        this.isModified = true;
     }
 
     public boolean removeCar() {
@@ -189,6 +188,7 @@ public class CarList {
         }
 
         this.carList.remove(index);
+        this.isModified = true;
         return true;
     }
 
@@ -214,6 +214,7 @@ public class CarList {
         updatedCar.setFrameId(frameId);
         updatedCar.setEngineId(engineId);
 
+        this.isModified = true;
         return true;
     }
 
@@ -227,6 +228,8 @@ public class CarList {
                 bw.newLine();
             }
         }
+
+        this.isModified = false;
         return true;
     }
 

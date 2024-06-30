@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class BrandList {
     private final ArrayList<Brand> brandList;
+    private boolean isModified = false;
 
     public BrandList(ArrayList<Brand> brandList) {
         this.brandList = brandList;
@@ -20,6 +21,10 @@ public class BrandList {
 
     public ArrayList<Brand> getBrandList() {
         return brandList;
+    }
+
+    public boolean isModified() {
+        return this.isModified;
     }
 
     public int searchId(String brandId) {
@@ -106,6 +111,7 @@ public class BrandList {
         double price = inputPrice();
 
         this.brandList.add(new Brand(brandId, brandName, soundBrand, price));
+        this.isModified = true;
     }
 
     public void updateBrand() {
@@ -127,6 +133,8 @@ public class BrandList {
         updatedBrand.setBrandName(brandName);
         updatedBrand.setSoundBrand(soundBrand);
         updatedBrand.setPrice(price);
+
+        this.isModified = true;
     }
 
     @Override
@@ -140,7 +148,7 @@ public class BrandList {
     }
 
     public void listBrands() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 
     public boolean saveToFile(String fileName) throws IOException {
@@ -153,6 +161,8 @@ public class BrandList {
                 bw.newLine();
             }
         }
+
+        this.isModified = false;
         return true;
     }
 
