@@ -31,17 +31,30 @@ public class BrandList {
         return -1;
     }
 
+    public void searchBrand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter brand ID: ");
+        String query = sc.nextLine();
+
+        int index = this.searchId(query);
+        if (index == -1) {
+            System.out.println("Not found!");
+            return;
+        }
+
+        System.out.println("Found brand:");
+        System.out.println(this.brandList.get(index));
+    }
+
     private String inputBrandName() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter brand name: ");
-        System.out.println();
         return sc.nextLine();
     }
 
     private String inputSoundBrand() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter sound brand: ");
-        System.out.println();
         return sc.nextLine();
     }
 
@@ -75,11 +88,11 @@ public class BrandList {
 
     public void addBrand() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a new brand ID: ");
         int searchResult = -1;
         String brandId = null;
 
         do {
+            System.out.print("Enter a new brand ID: ");
             brandId = sc.nextLine();
             searchResult = this.searchId(brandId);
 
@@ -87,7 +100,6 @@ public class BrandList {
                 System.out.println("Brand ID must not be duplicated!");
             }
         } while (searchResult != -1);
-        System.out.println();
 
         String brandName = inputBrandName();
         String soundBrand = inputSoundBrand();
