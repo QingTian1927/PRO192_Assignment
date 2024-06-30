@@ -17,10 +17,30 @@ public final class UserInterface {
         sc.nextLine();
     }
 
+    public static boolean yesNoQuestion(String prompt) {
+        Scanner sc = new Scanner(System.in);
+        String choice = sc.nextLine().toLowerCase();
+
+        while (true) {
+            System.out.print(prompt);
+            if (choice.equals("y") || choice.equals("yes")) {
+                return true;
+            }
+            if (choice.equals("n") || choice.equals("no")) {
+                return false;
+            }
+            System.out.println("Invalid choice! Try again!");
+        }
+    }
+
     public static void printTitleCard() {
         System.out.println("----------------------------");
         System.out.println("PRO192 Minh Trang CarManager");
         System.out.println("----------------------------\n");
+    }
+
+    public static void printMessage(String message) {
+        System.out.println("> " + ((message == null) ? "" : message) + "\n");
     }
 
     public static int mainMenuOptions() {
