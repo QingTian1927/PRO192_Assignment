@@ -19,10 +19,11 @@ public final class UserInterface {
 
     public static boolean yesNoQuestion(String prompt) {
         Scanner sc = new Scanner(System.in);
-        String choice = sc.nextLine().toLowerCase();
 
         while (true) {
             System.out.print(prompt);
+            String choice = sc.nextLine().toLowerCase();
+
             if (choice.equals("y") || choice.equals("yes")) {
                 return true;
             }

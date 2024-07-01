@@ -15,14 +15,14 @@ public final class Menu {
 
         for (int i = 0; i < options.size(); i++) {
             System.out.printf(
-                    "%d. %s\n%n",
+                    "%d. %s\n",
                     i + 1,
                     options.get(i).toString()
             );
         }
 
         System.out.println();
-        System.out.printf("Please choose an option 1..%d:", options.size());
+        System.out.printf("Please choose an option 1..%d: ", options.size());
     }
 
     public static <E> int int_getChoice(ArrayList<E> options) {

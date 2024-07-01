@@ -113,7 +113,7 @@ public class CarManager {
     }
 
     public static void saveBrandsHandler(BrandList brandList) {
-        System.out.printf("Saving contents to %s...\n", CarManager.BRANDS_SOURCE_FILE);
+        System.out.printf("\nSaving contents to %s...\n", CarManager.BRANDS_SOURCE_FILE);
         try {
             brandList.saveToFile(CarManager.BRANDS_SOURCE_FILE);
             System.out.println("Successfully saved contents to file.\n");
@@ -181,7 +181,7 @@ public class CarManager {
     }
 
     public static void saveCarsHandler(CarList carList) {
-        System.out.printf("Saving contents to %s...\n", CarManager.CARS_SOURCE_FILE);
+        System.out.printf("\nSaving contents to %s...\n", CarManager.CARS_SOURCE_FILE);
         try {
             carList.saveToFile(CarManager.CARS_SOURCE_FILE);
             System.out.println("Successfully saved contents to file.\n");
