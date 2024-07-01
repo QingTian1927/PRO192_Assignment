@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class CarList {
         Collections.sort(clonedCars);
 
         for (Car car : clonedCars) {
-            System.out.println(car.screenString());
+            System.out.println(car.screenString() + "\n");
         }
         System.out.println();
     }
@@ -74,13 +75,14 @@ public class CarList {
 
     public void printBasedBrandName() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a part of brand name: ");
+        System.out.print("Enter a part of brand name: ");
         String query = sc.nextLine();
+        System.out.println();
 
         int count = 0;
         for (Car car : this.carList) {
             if (car.getBrand().getBrandName().contains(query)) {
-                System.out.println(car.screenString());
+                System.out.println(car.screenString() + "\n");
                 count++;
             }
         }
@@ -107,14 +109,14 @@ public class CarList {
 
     private String inputFrameId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a new frame ID: ");
-        int searchResult = -1;
-        String frameId = null;
+        int searchResult = 0;
+        String frameId;
 
         do {
+            System.out.print("Enter a new frame ID: ");
             frameId = sc.nextLine();
             if (!Car.isValidFrameId(frameId)) {
-                System.out.println("Frame ID must be in the F0000 format!");
+                System.out.println("Frame ID must be in the F00000 format!");
                 continue;
             }
 
@@ -130,14 +132,14 @@ public class CarList {
 
     private String inputEngineId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a new engine ID: ");
-        int searchResult = -1;
-        String engineId = null;
+        int searchResult = 0;
+        String engineId;
 
         do {
+            System.out.print("Enter a new engine ID: ");
             engineId = sc.nextLine();
             if (!Car.isValidEngineId(engineId)) {
-                System.out.println("Engine ID must be in the E0000 format!");
+                System.out.println("Engine ID must be in the E00000 format!");
                 continue;
             }
 
@@ -189,6 +191,8 @@ public class CarList {
 
         this.carList.remove(index);
         this.isModified = true;
+        System.out.println("Remove successfully!");
+
         return true;
     }
 

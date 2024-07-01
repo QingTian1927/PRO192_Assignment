@@ -3,9 +3,9 @@ package com.example.models;
 public class Car implements Comparable<Car> {
     public static final String CAR_PROPERTY_SEPARATOR = ", ";
     public static final char FRAMEID_PREFIX = 'F';
-    public static final int FRAMEID_LENGTH = 5;
+    public static final int FRAMEID_LENGTH = 6;
     public static final char ENGINEID_PREFIX = 'E';
-    public static final int ENGINEID_LENGTH = 5;
+    public static final int ENGINEID_LENGTH = 6;
 
     private String carId;
     private Brand brand;
