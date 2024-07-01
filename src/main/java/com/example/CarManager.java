@@ -7,8 +7,8 @@ import com.example.ui.UserInterface;
 import java.io.IOException;
 
 public class CarManager {
-    private static final String BRANDS_SOURCE_FILE = "resources/brands.txt";
-    private static final String CARS_SOURCE_FILE = "resources/cars.txt";
+    private static final String BRANDS_SOURCE_FILE = "brands.txt";
+    private static final String CARS_SOURCE_FILE = "cars.txt";
 
     public static void main(String[] args) {
         BrandList brandList = new BrandList();
